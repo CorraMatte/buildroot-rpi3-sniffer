@@ -1,0 +1,3 @@
+loadkeys it
+touch dmesg.txt
+dmesg > dmesg.txt
