@@ -1,12 +1,7 @@
 #!/bin/sh
 
 # device polling #
-status=1
-while [ $status -eq "1" ]
-do
-cat /proc/pcan | grep can0 > /dev/null
-status=$?
-done
+while ! cat /proc/pcan | grep can0; do :; done
 
 # device set up #
 ip link set can0 type can bitrate 500000

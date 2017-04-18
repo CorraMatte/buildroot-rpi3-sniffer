@@ -2,7 +2,7 @@
 import sys
 import subprocess
 
-# CONSTANTs #
+# CONSTANTS #
 OFFSET_BYTES=2
 BLANK_LINES=2
 KB=0.0001
