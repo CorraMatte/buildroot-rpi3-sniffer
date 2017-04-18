@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# device polling #
+status=1
+while [ $status -eq "1" ]
+do
+cat /proc/pcan | grep can0 > /dev/null
+status=$?
+done
+
+# device set up #
+ip link set can0 type can bitrate 500000
+ip link set can0 up
+
+# start read #
+candump -aet z -n 10000 can0 > /root/candump.txt
+
+# device poweroff #
+ip link set can0 down
+poweroff
