@@ -8,11 +8,11 @@ then
 	exit 1
 fi
 
-if mount | grep /dev/sdb1 > /dev/null; then
+if mount | grep "$disk"1 > /dev/null; then
 	sudo umount "$disk"1
 fi
 
-if mount | grep /dev/sdb2 > /dev/null; then
+if mount | grep "$disk"2 > /dev/null; then
 	sudo umount "$disk"2
 fi
 
