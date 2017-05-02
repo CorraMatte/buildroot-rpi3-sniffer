@@ -1,0 +1,4 @@
+#!/bin/sh
+
+touch dmesg.txt
+dmesg > dmesg.txt
