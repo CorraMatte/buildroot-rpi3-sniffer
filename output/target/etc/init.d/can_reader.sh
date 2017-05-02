@@ -1,15 +1,16 @@
 #!/bin/sh
 
 # device polling #
-while ! cat /proc/pcan | grep can0; do :; done
+/etc/init.d/net_monitor
 
 # device set up #
 ip link set can0 type can bitrate 500000
 ip link set can0 up
 
 # start read #
-candump -aet z -n 10000 can0 > /root/candump.txt
+/etc/init.d/candump_buildroot
 
 # device poweroff #
 ip link set can0 down
-poweroff
+
+#poweroff
