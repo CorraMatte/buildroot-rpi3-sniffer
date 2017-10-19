@@ -8,7 +8,6 @@ It intends to be lighter and smaller as possible, including only the necessary p
 To compile the project and check the requirements, please visit: https://buildroot.org/.
 
 The relevant folder about the project are:
-
 	- scripts/: It contains all the developed script in order to get data from the different sources. 
 	can/ contains the C/C++ scripts in order to retrieve data from the CANBUS, 
 	while gps/ contains the Python script in order to retrieve data from the GPSD daemon. 
