@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PYTHON_GPS3
+
+	bool "python-gps3"
+	depends on BR2_PACKAGE_PYTHON
+
+	help
+		Python GPS3 module  
+		https://github.com/wadda/gps3

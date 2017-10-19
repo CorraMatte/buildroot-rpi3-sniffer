@@ -13,6 +13,17 @@ case "${2}" in
 
 # fixes rpi3 ttyAMA0 serial console
 dtoverlay=pi3-miniuart-bt
+
+# HDMI video settings
+#hdmi_drive=2
+#hdmi_group=2
+#hdmi_mode=42
+
+#Camera and GPS settings
+gpu_mem=128
+enable_uart=1
+core_freq=250
+
 __EOF__
 	fi
 	;;

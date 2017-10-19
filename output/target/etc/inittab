@@ -24,9 +24,7 @@
 ::sysinit:/etc/init.d/rcS
 
 # Put a getty on the serial port
-#ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100 # GENERIC_SERIAL
-#tty1::respawn:/sbin/getty -L  tty1 0 vt100 # HDMI console
-tty1::respawn:/bin/sh
+# tty1::respawn:/bin/sh # HDMI console
 
 # Stuff to do for the 3-finger salute
 #::ctrlaltdel:/sbin/reboot
