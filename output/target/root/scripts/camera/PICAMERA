@@ -16,4 +16,4 @@ case $P_RESOLUTION in
 	;;
 esac
 
-raspivid --nopreview --bitrate 1000000 --timeout 0 -o /test/video.h264 $RESOLUTION
+raspivid --nopreview --bitrate 10000000 --timeout 0 -o /test/video.h264 $RESOLUTION

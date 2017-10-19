@@ -1,6 +1,6 @@
 # Author: Matteo Corradini
 #
-# This Python script log data from GPSD daemon through gps3 library.
+# This Python script logs data from GPSD daemon through gps3 library.
 
 # IMPORT #######################################################################
 
