@@ -1,0 +1,19 @@
+#!/bin/sh
+
+# Select resolution
+P_RESOLUTION=$1
+RESOLUTION="--width 640 --height 480"
+
+case $P_RESOLUTION in
+	2)
+		RESOLUTION="--width 1024 --height 768"
+	;;
+	3)
+		RESOLUTION="--width 1280 --height 720"
+	;;
+	4)
+		RESOLUTION="--width 1920 --height 1080"
+	;;
+esac
+
+raspivid --nopreview --bitrate 10000000 --timeout 0 -o /test/video.h264 $RESOLUTION
