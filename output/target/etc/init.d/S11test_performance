@@ -1,9 +1,10 @@
 #!/bin/sh
 
-touch /test/top.txt
+FILE_NAME=/test/top.txt
+touch $FILE_NAME
 
 PID="$(pidof python)"
 PID=$PID $(pidof raspivid)
 PID=$PID $(pidof "${CAN_DIR}"/MULTITHREADING)
 
-top -b -d 1 -n "${PID}" >> top.txt
+top -b -d 1 -p "${PID}" >> $FILE_NAME
