@@ -1,0 +1,8 @@
+#!/bin/sh
+
+touch /test/top.txt
+$PID=$(pidof python)
+$PID=$PID+' '+$(pidof raspivid)
+$PID=$PID+' '+$(pidof "${CAN_DIR}"/MULTITHREADING)
+
+top -b -d 1 -n "${$PID}" >> top.txt
