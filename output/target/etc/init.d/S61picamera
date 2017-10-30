@@ -1,0 +1,3 @@
+#!/bin/sh
+
+"${CAMERA_DIR}"/PICAMERA $CAMERA_RESOLUTION & 			# Start video

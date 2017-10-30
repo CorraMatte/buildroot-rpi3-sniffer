@@ -1,0 +1,46 @@
+#!/bin/sh
+
+CONFIG=/boot/settings.conf
+source /root/scripts/config/set_env.sh
+
+# Read setting from file #
+if [ ! -d "/boot" ]; then
+	mkdir /boot
+fi
+
+# Create test dir #
+if [ ! -d "/test" ]; then
+	mkdir /test
+fi
+
+mount /dev/mmcblk0p1 /boot
+export $(awk '/^GPS_LOG/{print $0}' "${CONFIG}")
+export $(awk '/^BAUDRATE/{print $0}' "${CONFIG}")
+export $(awk '/^WAIT_TIME/{print $0}' "${CONFIG}")
+export $(awk '/^CAMERA_RESOLUTION/{print $0}' "${CONFIG}")
+umount /dev/mmcblk0p1
+
+# Start all init scripts in /etc/init.d
+# executing them in numerical order.
+#
+for i in /etc/init.d/S??* ;do
+
+     # Ignore dangling symlinks (if any).
+     [ ! -f "$i" ] && continue
+
+     case "$i" in
+	*.sh)
+	    # Source shell script for speed.
+	    (
+		trap - INT QUIT TSTP
+		set start
+		. $i
+	    )
+	    ;;
+	*)
+	    # No sh extension, so fork subprocess.
+	    $i start
+	    ;;
+    esac
+done
+

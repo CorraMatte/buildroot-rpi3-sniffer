@@ -1,0 +1,3 @@
+#!/bin/sh
+
+python "${GPS_DIR}"/GPS.py "${GPS_LOG}" &
