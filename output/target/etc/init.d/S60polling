@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# DEVICE POLLING #
+"${CAN_DIR}"/PEAK_POLLING
