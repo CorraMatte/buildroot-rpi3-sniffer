@@ -9,18 +9,20 @@ To compile the project and check the requirements, please visit: https://buildro
 
 The relevant folder about the project are:
 
-	- scripts/: It contains all the developed script in order to get data from the different sources. 
-	can/ contains the C/C++ scripts in order to retrieve data from the CANBUS, 
-	while gps/ contains the Python script in order to retrieve data from the GPSD daemon. 
-	utils/ contains Python scripts in order to automatize the building process. 
-	parser/ contains a Python script in order to compress and decompress the log files created by the platform.
+- scripts/: It contains all the developed script in order to get data from the different sources. 
+can/ contains the C/C++ scripts in order to retrieve data from the CANBUS, 
+while gps/ contains the Python script in order to retrieve data from the GPSD daemon. 
+utils/ contains Python scripts in order to automatize the building process. 
+parser/ contains a Python script in order to compress and decompress the log files created by the platform.
 	
-	- output/target/etc/init.d: It contains all the bash scripts which run at the boot time of the platform 
-	in order to configure and log data.
+- output/target/etc/init.d: It contains all the bash scripts which run at the boot time of the platform 
+in order to configure and log data.
 	
-	- output/target/root/scripts: It contains all the scripts created in order to log the data, 
-	inclused the raspicamera bash script.
+- output/target/root/scripts: It contains all the scripts created in order to log the data, 
+inclused the raspicamera bash script.
 	
-	- board/raspberry/: It contains the files in ordet to automatize the process after 
-	the image and the built are done.
+- board/raspberry/: It contains the files in ordet to automatize the process after 
+the image and the built are done.
+
+A GUI to show the data is also created at the following repository: https://github.com/CorraMatte/canbus_sniffer_gui .
 	
