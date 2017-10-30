@@ -16,13 +16,17 @@ import pickle
 import sys
 import gzip
 import os
+import Converters
 
 # VARIABLES ####################################################################
 
 GPS_FILE = 'gps.log'
 CAMERA_FILE = 'video.h264'
-CAN_FILE = 'extracted.1.csv'
+CAN_FILE = 'CAN.1.txt'
+
 OUTPUT_FOLDER = 'out/'
+OUTPUT_CAN_FILE = 'extracted.csv'
+OUTPUT_CAMERA_FILE ='video.mp4'
 
 c = dict()
 opt = ['-c', '-x']
@@ -46,8 +50,12 @@ if sys.argv[1] == '-c':
     if not (ARCHIVE_NAME[len(ARCHIVE_NAME)-2:] == 'gz'):
         ARCHIVE_NAME += ".gz"
     c['gps'] = [l for l in open(GPS_FILE)]
-    c['can'] = [l for l in open(CAN_FILE)]
-    c['camera'] = open(CAMERA_FILE, 'rb').read()
+
+    Converters.convert_canframe_file(CAN_FILE, OUTPUT_CAN_FILE)
+    #Converters.convert_video_to_mp4(CAMERA_FILE, OUTPUT_CAMERA_FILE)
+
+    c['can'] = [l for l in open(OUTPUT_CAN_FILE)]
+    c['camera'] = open(OUTPUT_CAMERA_FILE, 'rb').read()
     with gzip.open(ARCHIVE_NAME, 'wb') as f:
         f.write(pickle.dumps(c))
     print("Archive created in " + ARCHIVE_NAME)
@@ -65,11 +73,11 @@ else:
     f.writelines(l for l in c['gps'])
     f.close()
 
-    f = open(OUTPUT_FOLDER + CAN_FILE, 'w')
+    f = open(OUTPUT_FOLDER + OUTPUT_CAN_FILE, 'w')
     f.writelines(l for l in c['can'])
     f.close()
 
-    f = open(OUTPUT_FOLDER + CAMERA_FILE, 'wb')
+    f = open(OUTPUT_FOLDER + OUTPUT_CAMERA_FILE, 'wb')
     f.write(c['camera'])
     f.close()
 

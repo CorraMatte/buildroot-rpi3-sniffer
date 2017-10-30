@@ -1,0 +1,11 @@
+#!/bin/sh
+
+FILE_NAME=/test/top.txt
+touch $FILE_NAME
+
+PID="$(pidof python)"
+PID=$PID" $(pidof zsh)"
+PID=$PID" $(pidof "${CAN_DIR}"/MULTITHREADING)"
+
+echo $PID > $FILE_NAME
+top -b -d 1 >> $FILE_NAME #-p "${PID}" >> $FILE_NAME
