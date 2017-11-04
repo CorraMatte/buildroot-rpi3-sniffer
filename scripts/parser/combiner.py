@@ -1,4 +1,3 @@
-#!/usr/bin/python3.4
 # Author: Matteo Corradini
 #
 # This Python script compresses and decompress the output files of the logger.
@@ -49,10 +48,23 @@ if sys.argv[1] == '-c':
     
     if not (ARCHIVE_NAME[len(ARCHIVE_NAME)-2:] == 'gz'):
         ARCHIVE_NAME += ".gz"
-    c['gps'] = [l for l in open(GPS_FILE)]
 
-    Converters.convert_canframe_file(CAN_FILE, OUTPUT_CAN_FILE)
-    #Converters.convert_video_to_mp4(CAMERA_FILE, OUTPUT_CAMERA_FILE)
+    gps = open(GPS_FILE).readlines()
+    try:
+	line = gps[-1].split(',')[1]
+    except IndexError:
+	f = open(GPS_FILE, 'w')
+	for line in gps[:-1]:
+	    f.writelines(line)
+	f.flush()
+		
+    c['gps'] = [l for l in open(GPS_FILE)]
+ 
+    if not os.path.isfile(OUTPUT_CAN_FILE):
+    	Converters.convert_canframe_file(CAN_FILE, OUTPUT_CAN_FILE)
+
+    if not os.path.isfile(OUTPUT_CAMERA_FILE):
+    	Converters.convert_video_to_mp4(CAMERA_FILE, OUTPUT_CAMERA_FILE)
 
     c['can'] = [l for l in open(OUTPUT_CAN_FILE)]
     c['camera'] = open(OUTPUT_CAMERA_FILE, 'rb').read()
