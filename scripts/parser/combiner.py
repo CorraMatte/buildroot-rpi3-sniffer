@@ -1,3 +1,5 @@
+#!/usr/bin/python3.4
+
 # Author: Matteo Corradini
 #
 # This Python script compresses and decompress the output files of the logger.
@@ -25,7 +27,7 @@ CAN_FILE = 'CAN.1.txt'
 
 OUTPUT_FOLDER = 'out/'
 OUTPUT_CAN_FILE = 'extracted.csv'
-OUTPUT_CAMERA_FILE ='video.mp4'
+OUTPUT_CAMERA_FILE = 'video.mp4'
 
 c = dict()
 opt = ['-c', '-x']
@@ -37,35 +39,28 @@ ARCHIVE_NAME = sys.argv[2]
 # Otherwise display the command help.
 if len(sys.argv) < 3 or sys.argv[1] not in opt:
     print("Help:\n"
-            "\t-c archive_name\t\tto create the archive (source file namen have"
-            " to be: " + GPS_FILE + ", " + CAMERA_FILE + ", " + CAN_FILE + ")\n"
-            "\t-x archive name\t\tto extract the archive\n")
+          "\t-c archive_name\t\tto create the archive (source file namen have"
+          " to be: " + GPS_FILE + ", " + CAMERA_FILE + ", " + CAN_FILE + ")\n"
+          "\t-x archive name\t\tto extract the archive\n")
     sys.exit(1)
 
 # Compress the files
 if sys.argv[1] == '-c':
     print("Creating the archive..")
-    
-    if not (ARCHIVE_NAME[len(ARCHIVE_NAME)-2:] == 'gz'):
+
+    if not (ARCHIVE_NAME[len(ARCHIVE_NAME) - 2:] == 'gz'):
         ARCHIVE_NAME += ".gz"
 
-    gps = open(GPS_FILE).readlines()
-    try:
-	line = gps[-1].split(',')[1]
-    except IndexError:
-	f = open(GPS_FILE, 'w')
-	for line in gps[:-1]:
-	    f.writelines(line)
-	f.flush()
-		
-    c['gps'] = [l for l in open(GPS_FILE)]
- 
+    Converters.correct_last_line_file(GPS_FILE)
+    Converters.correct_last_line_file(CAN_FILE)
+
     if not os.path.isfile(OUTPUT_CAN_FILE):
-    	Converters.convert_canframe_file(CAN_FILE, OUTPUT_CAN_FILE)
+        Converters.convert_canframe_file(CAN_FILE, OUTPUT_CAN_FILE)
 
     if not os.path.isfile(OUTPUT_CAMERA_FILE):
-    	Converters.convert_video_to_mp4(CAMERA_FILE, OUTPUT_CAMERA_FILE)
+        Converters.convert_video_to_mp4(CAMERA_FILE, OUTPUT_CAMERA_FILE)
 
+    c['gps'] = [l for l in open(GPS_FILE)]
     c['can'] = [l for l in open(OUTPUT_CAN_FILE)]
     c['camera'] = open(OUTPUT_CAMERA_FILE, 'rb').read()
     with gzip.open(ARCHIVE_NAME, 'wb') as f:
@@ -94,7 +89,3 @@ else:
     f.close()
 
     print("Archive successfully extracted in " + OUTPUT_FOLDER)
-
-
-
-

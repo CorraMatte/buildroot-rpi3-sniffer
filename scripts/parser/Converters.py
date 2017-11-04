@@ -61,3 +61,16 @@ def convert_video_to_mp4(camera_file, output_camera_file):
     )
 
     ff.run()
+
+
+# Correct the last line of the GPS log file if needed
+def correct_last_line_file(log_file):
+    f = open(log_file).readlines()
+    try:
+        f[-1].split(',')[1]
+    except IndexError:
+        fout = open(log_file, 'w')
+        for line in f[:-1]:
+            fout.writelines(line)
+        fout.flush()
+
