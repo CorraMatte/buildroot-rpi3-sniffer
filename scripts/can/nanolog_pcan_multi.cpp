@@ -41,7 +41,7 @@ void *consumer(void *){
         }
 
         /** wait for new data */
-        usleep(1);
+        usleep(10);
     }
 }
 
@@ -82,6 +82,8 @@ void read_frames(const int WAIT_TIME){
          *  WAIT_UNTIL_CLOSE seconds*/
         if ((timer.tv_sec - last_time_recv) > WAIT_TIME)
             exit(2);
+
+		usleep(10);
     }
 
     return;
