@@ -57,7 +57,7 @@ def convert_canframe_file(can_file, output_canfile):
 def convert_video_to_mp4(camera_file, output_camera_file):
     ff = ffmpy.FFmpeg(
         inputs={camera_file: None},
-        outputs={output_camera_file: None}
+        outputs={output_camera_file: '-c copy'}
     )
 
     ff.run()
