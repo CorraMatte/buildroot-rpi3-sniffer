@@ -12,9 +12,7 @@ void read_frames(const int WAIT_TIME){
 
     while(1) {
         clock_gettime(CLOCK_REALTIME, &timer);
-
-        if (CAN_Read(PCAN_USBBUS1, &frame_read, NULL) 
-			!= PCAN_ERROR_QRCVEMPTY) {
+        if (CAN_Read(PCAN_USBBUS1, &frame_read, NULL) != PCAN_ERROR_QRCVEMPTY) {
 #ifdef VERBOSE
             printf(" id:%d len: %d\n", frame_read.ID, frame_read.LEN);
 #endif

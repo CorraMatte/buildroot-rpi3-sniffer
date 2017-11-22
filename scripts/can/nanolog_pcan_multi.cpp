@@ -35,7 +35,7 @@ void *consumer(void *){
         }
 
         /** consume the buffer */
-        while (con_index < buffer.index){
+        while (con_index < buffer.index && buffer.index != NUMBER_CAN_FRAMES){
             TPCANMsg frame_read = buffer.can_buffer[con_index];
             ++con_index;
 #ifdef VERBOSE
@@ -45,7 +45,7 @@ void *consumer(void *){
         }
 
         /** wait for new data */
-        usleep(10);
+        usleep(5);
     }
 }
 
