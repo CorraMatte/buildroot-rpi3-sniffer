@@ -23,17 +23,21 @@ void *consumer(void *){
     while (1){
         /** restart if the buffer is full */
         if (con_index > buffer.index){
-            TPCANMsg frame_read = buffer.can_buffer[++con_index];
+            while (con_index < NUMBER_CAN_FRAMES){
+                TPCANMsg frame_read = buffer.can_buffer[con_index];
+                ++con_index;
 #ifdef VERBOSE
-            printf("\n--C:id:%d len: %d--\n", frame_read.ID, frame_read.LEN);
+                printf("--C:id:%d len: %d--\n", frame_read.ID, frame_read.LEN);
 #endif
-            LOG_INFO << frame_read.ID <<','<< *((uint64_t*)frame_read.DATA);
+                LOG_INFO << frame_read.ID <<','<< *((uint64_t*)frame_read.DATA);
+            }
             con_index = 0;
         }
 
         /** consume the buffer */
         while (con_index < buffer.index){
-            TPCANMsg frame_read = buffer.can_buffer[con_index++];
+            TPCANMsg frame_read = buffer.can_buffer[con_index];
+            ++con_index;
 #ifdef VERBOSE
             printf("--C:id:%d len: %d--\n", frame_read.ID, frame_read.LEN);
 #endif
@@ -83,10 +87,8 @@ void read_frames(const int WAIT_TIME){
         if ((timer.tv_sec - last_time_recv) > WAIT_TIME)
             exit(2);
 
-		usleep(10);
+		usleep(2);
     }
-
-    return;
 }
 
 

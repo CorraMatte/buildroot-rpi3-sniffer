@@ -32,8 +32,9 @@ void read_frames(const int WAIT_TIME){
          *  WAIT_UNTIL_CLOSE seconds */
         if ((timer.tv_sec - last_time_recv) > WAIT_TIME)
             exit(1);
+
+        usleep(10);
     }
-    return;
 }
 
 
