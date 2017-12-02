@@ -9,14 +9,13 @@
 
 #ifdef DEBUG
 #define FOLDER "/tmp/"
-#define FILE_SIZE 10
 #else
 #define FOLDER "/test/"
-#define FILE_SIZE 500
 #endif
 
 #define LOG_FILE "CAN"
-#define NUMBER_CAN_FRAMES 16112
+#define NUMBER_CAN_FRAMES 1024//131072
+#define FILE_SIZE 500
 
 #endif //CAN_UTILITIES_H
 

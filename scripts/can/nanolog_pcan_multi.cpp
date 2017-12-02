@@ -5,7 +5,7 @@
 /******** DATA STRUCTURES *****************************************************/
 
 struct buffer_t{
-    int index;
+    int index = 0;
     TPCANMsg can_buffer[NUMBER_CAN_FRAMES];
 };
 
@@ -35,7 +35,7 @@ void *consumer(void *){
         }
 
         /** consume the buffer */
-        while (con_index < buffer.index && buffer.index != NUMBER_CAN_FRAMES){
+        while (con_index < buffer.index){
             TPCANMsg frame_read = buffer.can_buffer[con_index];
             ++con_index;
 #ifdef VERBOSE
@@ -50,9 +50,6 @@ void *consumer(void *){
 }
 
 void read_frames(const int WAIT_TIME){
-    buffer.index = 0;
-    pthread_t pt_consumer;
-    pthread_create(&pt_consumer, NULL, consumer, NULL);
 
     /** Timer settings */
     struct timespec timer = {0, 0};
@@ -63,7 +60,7 @@ void read_frames(const int WAIT_TIME){
     while(1){
         clock_gettime(CLOCK_REALTIME, &timer);
 
-        if (CAN_Read(PCAN_USBBUS1,&buffer.can_buffer[buffer.index],NULL) 
+        if (CAN_Read(PCAN_USBBUS1, &buffer.can_buffer[buffer.index],NULL)
 			!= PCAN_ERROR_QRCVEMPTY) {
 #ifdef VERBOSE
             printf("\n--P: id:%d len: %d", buffer.can_buffer[buffer.index].ID,
@@ -97,8 +94,11 @@ void read_frames(const int WAIT_TIME){
 int main(int argc, char * argv[]){
 	int WAIT_TIME = atoi(getenv("WAIT_TIME"));
 	int BAUDRATE = atoi(getenv("BAUDRATE"));
-
-    initialize(BAUDRATE);
+	initialize(BAUDRATE);
+	
+    pthread_t pt_consumer;
+    pthread_create(&pt_consumer, NULL, consumer, NULL);	
+	
     read_frames(WAIT_TIME);
     return 0;
 }
