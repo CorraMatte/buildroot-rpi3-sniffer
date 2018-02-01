@@ -80,11 +80,12 @@ void read_frames(const int WAIT_TIME){
 #endif
 
         /** Check if there are frames to read, otherwise exit after 
-         *  WAIT_UNTIL_CLOSE seconds*/
+         *WAIT_TIME seconds*/
+#ifdef WAIT_TIME
         if ((timer.tv_sec - last_time_recv) > WAIT_TIME)
             exit(2);
-
-		usleep(2);
+#endif
+	usleep(5);
     }
 }
 
