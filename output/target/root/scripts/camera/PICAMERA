@@ -15,4 +15,4 @@ case $P_RESOLUTION in
 		RESOLUTION="--width 1920 --height 1080"
 	;;
 esac
-raspivid --nopreview --bitrate 5000000 --timeout 0 -o /test/video.h264 $RESOLUTION
+raspivid --nopreview --bitrate 5000000 --timeout 0 -o "$TEST_FOLDER"/video.h264 $RESOLUTION

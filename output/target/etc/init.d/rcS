@@ -9,9 +9,15 @@ if [ ! -d "/boot" ]; then
 fi
 
 # Create test dir #
-if [ ! -d "/test" ]; then
-	mkdir /test
-fi
+for i in $(seq 50)
+do
+	if [ ! -d "/test_$i" ]; then
+		mkdir "/test_$i";
+		export TEST_FOLDER="/test_$i";
+		echo $TEST_FOLDER
+		break;
+	fi	
+done
 
 mount /dev/mmcblk0p1 /boot
 export $(awk '/^GPS_LOG/{print $0}' "${CONFIG}")
@@ -43,4 +49,3 @@ for i in /etc/init.d/S??* ;do
 	    ;;
     esac
 done
-

@@ -9,15 +9,13 @@
 
 #ifdef DEBUG
 #define FOLDER "/tmp/"
-#else
-#define FOLDER "/test/"
 #endif
 
 #define LOG_FILE "CAN"
-#define NUMBER_CAN_FRAMES 1024//131072
+#define NUMBER_CAN_FRAMES 1024
 #define FILE_SIZE 500
 
 #endif //CAN_UTILITIES_H
 
-void initialize(const int BAUDRATE);
+void initialize(const int BAUDRATE, const char* FOLDER);
 int get_baudrate(const int BAUDRATE);

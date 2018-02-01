@@ -35,7 +35,7 @@ int get_baudrate(const int BAUDRATE){
 }
 
 /* Initilize PCAN and Nanolog */
-void initialize(const int BAUDRATE){
+void initialize(const int BAUDRATE, const char* FOLDER){
     TPCANStatus Status;
     if (Status = CAN_Initialize(PCAN_USBBUS1, get_baudrate(BAUDRATE), 0, 0, 0)
         != PCAN_ERROR_OK){

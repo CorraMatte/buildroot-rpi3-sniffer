@@ -1,3 +1,8 @@
 #!/bin/sh
 
-"${CAN_DIR}"/MULTITHREADING &
+"${CAN_DIR}"/MULTITHREADING
+
+killall python
+killall raspivid
+
+poweroff

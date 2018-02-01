@@ -6,6 +6,7 @@
 
 import time
 import sys
+import os
 from gps3 import gps3
 from Utilities import FILE_NAME
 
@@ -17,7 +18,7 @@ gps_socket.connect()  # Connect socket
 gps_socket.watch()
 
 # Initialize log file
-FOLDER = '/test/'
+FOLDER = os.environ['TEST_FOLDER']
 f = open(FOLDER + FILE_NAME, 'w')
 f.writelines('Time,Altitude,Latitude,Longitude,Speed,Climb\n')
 

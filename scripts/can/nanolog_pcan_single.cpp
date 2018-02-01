@@ -41,8 +41,9 @@ void read_frames(const int WAIT_TIME){
 int main(int argc, char * argv[]){
 	int WAIT_TIME = atoi(getenv("WAIT_TIME"));
 	int BAUDRATE = atoi(getenv("BAUDRATE"));
+	char* FOLDER = getenv("TEST_FOLDER");
+	initialize(BAUDRATE, FOLDER);
 
-    initialize(BAUDRATE);
     read_frames(WAIT_TIME);
     return 0;
 }
