@@ -1,0 +1,8 @@
+config BR2_PACKAGE_PCAN_DRIVER
+
+	bool "pcan-driver"
+
+	help
+		PCAN driver from PEAK
+		http://www.peak-system.com/fileadmin/media/linux/index.htm
+
