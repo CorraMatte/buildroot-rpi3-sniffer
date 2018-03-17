@@ -1,7 +1,6 @@
 #!/bin/sh
 
 CONFIG=/boot/settings.conf
-source /root/scripts/config/set_env.sh
 
 # Read setting from file #
 if [ ! -d "/boot" ]; then
@@ -12,9 +11,8 @@ fi
 for i in $(seq 50)
 do
 	if [ ! -d "/test_$i" ]; then
-		mkdir "/test_$i";
-		export TEST_FOLDER="/test_$i";
-		echo $TEST_FOLDER
+		mkdir "/test_$i/";
+		export TEST_FOLDER="/test_$i/";
 		break;
 	fi	
 done
