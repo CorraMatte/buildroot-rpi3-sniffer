@@ -73,4 +73,3 @@ def correct_last_line_file(log_file):
         for line in f[:-1]:
             fout.writelines(line)
         fout.flush()
-

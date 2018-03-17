@@ -35,8 +35,13 @@ int get_baudrate(const int BAUDRATE){
 }
 
 /* Initilize PCAN and Nanolog */
-void initialize(const int BAUDRATE, const char* FOLDER){
+void initialize(const int BAUDRATE, const char* TEST_FOLDER){
+#ifdef DEBUG
+	TEST_FOLDER = "/tmp/";
+#endif
     TPCANStatus Status;
+	printf("Dir: %s, File: %s\n\n", TEST_FOLDER, LOG_FILE);
+    nanolog::initialize(nanolog::GuaranteedLogger(), TEST_FOLDER, LOG_FILE, FILE_SIZE);
     if (Status = CAN_Initialize(PCAN_USBBUS1, get_baudrate(BAUDRATE), 0, 0, 0)
         != PCAN_ERROR_OK){
 #ifdef VERBOSE            
@@ -44,7 +49,5 @@ void initialize(const int BAUDRATE, const char* FOLDER){
 #endif
         exit(Status);
 	}
-    nanolog::initialize(nanolog::GuaranteedLogger(), FOLDER, LOG_FILE,
-                        FILE_SIZE);
     return;
 }
